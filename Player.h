@@ -7,7 +7,6 @@
 #include "Dice.h"
 #include "Dice_rolling.h"
 class Country;
-#include "Country.h"
 
 class Player
 {
