@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Country.h"
+#include "Hands.h"
 #include <iostream>
 #include <vector>
 #include <string>
