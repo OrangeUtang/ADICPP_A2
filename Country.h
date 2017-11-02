@@ -41,6 +41,8 @@ public:
 	void setNumberAdjacency(int);
 
 	Country* getAdjacencyAt(int);
+	bool isAdjacent(Country*);
+	void printAdjacents();
 	void setAdjacencyAt(int, Country*);
 
 	
@@ -53,7 +55,7 @@ public:
 	void setLinked(bool);
 
 	Player* getOwner();
-	void setOwner(Player);
+	void setOwner(Player*);
 
 
 };
