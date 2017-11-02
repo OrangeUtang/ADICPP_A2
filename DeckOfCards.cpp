@@ -13,7 +13,12 @@ using namespace std;
 int NumOfCards;
 stack<Cards*> Deck;
 
-DeckOfCards::DeckOfCards(std::string s[], int numOfCountries)
+DeckOfCards::DeckOfCards()
+{
+
+}
+
+DeckOfCards::DeckOfCards(vector<string*> countriesName, int numOfCountries)
 {
 	NumOfCards = numOfCountries;
 
@@ -21,32 +26,32 @@ DeckOfCards::DeckOfCards(std::string s[], int numOfCountries)
 	srand(time(0));
 	int zero = 0, one = 0, two = 0;
 
-	for (int i = 0; i < NumOfCards; i++)
+	for(int i = 0; i < NumOfCards; i++)
 	{
 		int ran;
-		while (true)
+		while(true)
 		{
 			ran = rand() % 3;
-			if (zero <= one && zero <= two && ran == 0)
+			if(zero <= one && zero <= two && ran == 0)
 				break;
-			if (one <= zero && one <= two && ran == 1)
+			if(one <= zero && one <= two && ran == 1)
 				break;
-			if (two <= zero && two <= one && ran == 2)
+			if(two <= zero && two <= one && ran == 2)
 				break;
 		}
-		switch (ran)
+		switch(ran)
 		{
-		case 0: tempType = "Infantry";
-			zero++;
-			break;
-		case 1: tempType = "Artillery";
-			one++;
-			break;
-		case 2: tempType = "Cavalery";
-			two++;
-			break;
+			case 0 : tempType = "Infantry";
+					zero++;
+				break;
+			case 1 : tempType = "Artillery";
+					one++;
+				break;
+			case 2 : tempType = "Cavalery";
+					two++;
+				break;
 		}
-		Cards *temp = new Cards(s[i], tempType);
+		Cards *temp = new Cards(*countriesName[i], tempType);
 		Deck.push(temp);
 	}
 	cout << "Deck generated with size: " << Deck.size() << endl;
@@ -55,7 +60,7 @@ DeckOfCards::DeckOfCards(std::string s[], int numOfCountries)
 
 Cards DeckOfCards::Draw()
 {
-	if (Deck.size() == 0)
+	if(Deck.size() == 0)
 	{
 		cout << "The Deck is empty." << endl;
 		return Cards();
@@ -68,9 +73,14 @@ Cards DeckOfCards::Draw()
 	return c;
 }
 
+int DeckOfCards::getNumCardsDeck()
+{
+	return NumOfCards;
+}
+
 bool DeckOfCards::IsEmpty()
 {
-	if (Deck.size() > 0)
+	if(Deck.size() > 0)
 		return false;
 	return true;
 }

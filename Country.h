@@ -1,8 +1,6 @@
 #pragma once
 
 class Continent;
-class Player;
-#include "Continent.h"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -17,7 +15,7 @@ private:
 	string name;
 	int army;
 	int numberAdjacency;
-	vector <Country*> adjacency;
+	//vector <Country*> adjacency;
 	Continent* continent;
 	bool linked;
 	Player* owner;
@@ -26,6 +24,7 @@ private:
 
 
 public:
+	vector <Country*> adjacency;
 	Country(string, int);
 	Country(string, vector <Country*>);
 	Country(string);
@@ -41,11 +40,9 @@ public:
 	void setNumberAdjacency(int);
 
 	Country* getAdjacencyAt(int);
-	bool isAdjacent(Country*);
-	void printAdjacents();
+	bool isAdjacent(Country * aCountry);
 	void setAdjacencyAt(int, Country*);
 
-	
 	void setAdjacency(vector <Country*>);
 
 	Continent* getContinent();
@@ -56,6 +53,8 @@ public:
 
 	Player* getOwner();
 	void setOwner(Player*);
+
+	void printAdjacents();
 
 
 };

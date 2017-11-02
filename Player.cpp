@@ -4,12 +4,14 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Reinforcement.h" 
 
-
+static Country* null = new Country("NULL", 0);
+Hand hand;
 
 Player::Player(void)
 {
-	hand = new Hand;
+
 	vector<Country*> countries;
 
 }
@@ -21,36 +23,35 @@ Player::~Player(void)
 
 void Player::pickCard(DeckOfCards &deck)
 {
-	hand->AddCardToHand(deck.Draw());
-
+	hand.AddCardToHand(deck.Draw());
+	
 }
 
-void Player::addCountry(Country *c) 
-
-{
+void Player::addCountry(Country *c) {
 
 	countries.push_back(c);
 
 }
 
-void Player::removeCountry(int x) 
-
-{
-
-	countries.at(x)->~Country();
-
-}
-
-
-void Player::reinforce()
+void Player::Reinforce()
 {
 	cout << "The player Reinforeces!" << endl;
+	Reinforcement::ReinforcementsPhase(this);
+}
+
+void Player::removeCountry(int x) {
+
+	countries.at(x) = null;
+
+}
+
+Hand* Player::getHand()
+{
+	return &hand;
 }
 
 
-/*
-
-int* Player::attack(int numArmies)
+int* Player::Attack(int numArmies)
 {
 
 	int *att;
@@ -71,7 +72,7 @@ int* Player::attack(int numArmies)
 
 
 
-int* Player::defend(int numArmies)
+int* Player::Defend(int numArmies)
 {
 
 	int *def;
@@ -91,7 +92,6 @@ int* Player::defend(int numArmies)
 
 }
 
-*/
 
 int * Player::sort(int * ar)
 {
@@ -111,59 +111,10 @@ int * Player::sort(int * ar)
 	return ar;
 }
 
-//method used to fortify at the end of a turn
-bool Player::fortify(Country* initialC, Country* destinationC, int armies)
+
+void Player::Fortify()
 {
-	bool success = false;
-
-	cout << "The player tries to fortify " << armies << " armies from " << initialC->getName() << " to " << destinationC->getName() << endl;
-
-	//checks if the owner of the first country is the calling player
-	if (initialC->getOwner() != this)
-	{
-		cout << "initial Country does not belong to the right player" << endl;
-		return false;
-	}
-
-	//checks if the owner of second country is the calling player
-	if (destinationC->getOwner() != this)
-	{
-		cout << "destination Country does not belong to the right player " << endl;
-		return false;
-	}
-
-
-	//checks if the second country is adjacent to the first one
-	for (int i = 0; i < initialC->getNumberAdjacency(); i++)
-	{
-		if (initialC->getAdjacencyAt(i) == destinationC)
-		{
-			success = true;
-		}
-	}
-
-	//return false if they 
-	if (success == false)
-	{
-		cout << "destination is not adjacent, can't proceed" << endl;
-		return false;
-	}
-
-
-	//check if initial country has enough armies to fortify as much unit as what is required
-	if (armies >= initialC->getArmy())
-	{
-		cout << "Insuficient army in this country, need to leave a minimum of 1 army per country" << endl;
-		return false;
-	}
-
-
-	// if the code reach this point, it means the move is valid, proceeds by removing armies from starting position and adds them to ending position.
-	initialC->setArmy(initialC->getArmy() - armies);
-	destinationC->setArmy(destinationC->getArmy() + armies);
-	cout << "The player Fortities " << armies << " armies from " << initialC->getName() << " to " << destinationC->getName() << endl;
-	return true;
-
+	cout << "The player Fortities!" << endl;
 }
 
 
@@ -199,14 +150,22 @@ int Player::GetTotalArmySize()
 
 void Player::printCountries() {
 
+
 	if (countries.size() == 0) {
 		cout << "Player has no owned countries at this time ";
 	}
 
 	else {
+
 		for (int i = 0; i < countries.size(); i++)
 		{
-			cout << "Country " << i << " : " << countries.at(i)->getName() << endl;
+			if (countries.at(i)->getName() == "NULL") {
+
+			}
+
+			else{
+				cout << countries.at(i)->getName() << endl;
+			}
 		}
 	}
 
@@ -216,7 +175,7 @@ void Player::printCountries() {
 int Player::searchCountry(string name) {
 
 	for (int i = 0; i < countries.size(); i++) {
-
+	
 		if (countries.at(i)->getName() == name) { return i; }
 
 	}
@@ -227,11 +186,19 @@ int Player::searchCountry(string name) {
 
 }
 
+bool Player::OwnsContinent()
+{
+	if (continents.size() > 0)
+		return true;
+	else
+		return false;
+}
+
 
 
 void Player::printHand()
 {
-	hand->PrintHand();
+		hand.PrintHand();
 }
 
 int Player::getNumDices()

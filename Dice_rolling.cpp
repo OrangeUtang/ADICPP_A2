@@ -5,35 +5,35 @@ using namespace std;
 int NumOfDices = 0;
 int countRoll = 0;
 
-void Dice_rolling::roll()
+int Dice_rolling::roll(int MaxNumDice)
 {
-
-	while (NumOfDices < 1 || NumOfDices >3) {
-		cout << endl << "Select the number of dice you want to roll (1 to 3): ";
+	
+	while (NumOfDices < 1 || NumOfDices >MaxNumDice) {
+		cout << endl << "Select the number of dice you want to roll (1 to " << MaxNumDice << "): ";
 		cin >> NumOfDices;
 	}
 
 	switch (NumOfDices)
 	{
-	case 1:
+	case 1 :
 		dice1.generate_value();
 		container[0] = dice1.get_dice();
 		nb_values(container[0]);
-		cout << "Values of roll : " << container[0];
+		cout << endl << "Values of roll : " << container[0];
 		countRoll++;
-		break;
-	case 2:
+		break; 
+	case 2: 
 		dice1.generate_value();
 		container[0] = dice1.get_dice();
 		nb_values(container[0]);
 		dice2.generate_value();
 		container[1] = dice2.get_dice();
 		nb_values(container[1]);
-		cout << "Values of roll : " << container[0] << " and " << container[1];
+		cout << endl << "Values of roll : " << container[0] << " and " << container[1];
 		countRoll += 2;
 		break;
 
-	case 3:
+	case 3: 
 		dice1.generate_value();
 		container[0] = dice1.get_dice();
 		nb_values(container[0]);
@@ -43,26 +43,28 @@ void Dice_rolling::roll()
 		dice3.generate_value();
 		container[2] = dice3.get_dice();
 		nb_values(container[2]);
-		cout << "Values of roll : " << container[0] << ", " << container[1] << " and " << container[2];
+		cout << endl<< "Values of roll : " << container[0] << ", " << container[1] << " and " << container[2];
 		countRoll += 3;
 		break;
-
+	
 	default: cout << "Wrong number of dice ";
 		break;
 	}
 
 	set_percentage();
 	//reinitialize number of dices
+	int temp = NumOfDices;
 	NumOfDices = 0;
 
+	return temp;
 }
 
 void Dice_rolling::set_percentage()
 {
 
 	perc_of_values[0] = 100.0 * (nb_of_values[0]) / static_cast<double>(countRoll);
-	perc_of_values[1] = 100.0 * (nb_of_values[1]) / static_cast<double>(countRoll);
-	perc_of_values[2] = 100.0 * (nb_of_values[2]) / static_cast<double>(countRoll);
+	perc_of_values[1] = 100.0 * (nb_of_values[1]) / static_cast<double>(countRoll) ;
+	perc_of_values[2] = 100.0 * (nb_of_values[2]) / static_cast<double>(countRoll) ;
 	perc_of_values[3] = 100.0 * (nb_of_values[3]) / static_cast<double>(countRoll);
 	perc_of_values[4] = 100.0 * (nb_of_values[4]) / static_cast<double>(countRoll);
 	perc_of_values[5] = 100.0 * (nb_of_values[5]) / static_cast<double>(countRoll);
@@ -82,7 +84,7 @@ void Dice_rolling::get_values()
 		cout << container[0] << ", " << container[1] << ", " << container[2]; break;
 	}
 
-}
+	}
 
 void Dice_rolling::getCountRoll()
 {
@@ -125,6 +127,14 @@ void Dice_rolling::printNb()
 	}
 
 }
+
+
+int* Dice_rolling::getContainer() {
+
+	return container;
+
+}
+
 
 
 

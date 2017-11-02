@@ -2,9 +2,9 @@
 #include "Dice.h"
 #include <string>
 
-class Dice_rolling
+class Dice_rolling 
 {
-private:
+private : 
 
 	Dice dice1;
 	Dice dice2;
@@ -15,7 +15,7 @@ private:
 
 public:
 
-	void roll();
+	int roll(int x);
 
 	void set_percentage();
 
@@ -29,7 +29,11 @@ public:
 
 	void printNb();
 
+	int * getContainer();
 
+	
+
+	
 
 };
 

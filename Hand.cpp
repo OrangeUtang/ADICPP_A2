@@ -3,18 +3,16 @@
 #include "Cards.h"
 
 using namespace std;
-Cards hand[5];
-int Soldiers = 2;
 
-Hand::Hand(void)
+int Soldiers = 2;
+Cards hand[5];
+
+Hand::Hand()
 {
-	hand[0] = Cards("Canada", "Artillery");
-	hand[1] = Cards("Africa", "Artillery");
-	hand[2] = Cards("Mexico", "Infantry");
-	hand[3] = Cards("Asia", "Infantry");
-	hand[4] = Cards("France", "Cavalry");
 
 }
+
+
 
 void Hand::AddCardToHand(Cards card)
 {
@@ -156,11 +154,17 @@ int Hand::Exchange()
 		}
 	}
 	if (receive)
+	{
 		cout << "You have received: " << Soldiers << " soldiers." << endl;
+		cout << "------------ END EXCHANGE ----------------" << endl << endl;
+		return Soldiers;
+	}
 	else
+	{
 		cout << "The requirements for the exchange were not met" << endl;
-	cout << "------------ END EXCHANGE ----------------" << endl << endl;
-	return Soldiers;
+		cout << "------------ END EXCHANGE ----------------" << endl << endl;
+		return 0;
+	}
 }
 
 void Hand::DefineSoldiers()
