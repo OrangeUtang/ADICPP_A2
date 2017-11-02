@@ -13,7 +13,7 @@ Country::Country(string aName, int aNumber)
 	adjacency.resize(aNumber);
 	continent;
 	linked = false;
-	owner;
+	owner = NULL;
 }
 
 Country::Country(string aName, vector <Country*> aVector)
@@ -24,7 +24,7 @@ Country::Country(string aName, vector <Country*> aVector)
 	adjacency = aVector;
 	continent;
 	linked = false;
-	owner;
+	owner = NULL;
 }
 
 Country::Country(string aName)
@@ -35,7 +35,7 @@ Country::Country(string aName)
 	adjacency;
 	continent;
 	linked = false;
-	owner;
+	owner = NULL;
 }
 
 
@@ -80,6 +80,25 @@ Country* Country::getAdjacencyAt(int x)
 	return adjacency.at(x);
 }
 
+bool Country::isAdjacent(Country* aCountry)
+{
+	for (int i = 0; i < numberAdjacency; i++)
+	{
+		if (getAdjacencyAt(i) == aCountry)
+			return true;
+	}
+
+	return false;
+}
+
+void Country::printAdjacents()
+{
+	for (int i = 0; i < numberAdjacency; i++)
+	{
+		cout << getAdjacencyAt(i)->getName() << endl;
+	}
+}
+
 void Country::setAdjacency(vector <Country*> aVector)
 {
 	numberAdjacency = aVector.size();
@@ -117,7 +136,7 @@ Player* Country::getOwner()
 	return owner;
 }
 
-void Country::setOwner(Player aPlayer)
+void Country::setOwner(Player* aPlayer)
 {
-	owner = &aPlayer;
+	owner = aPlayer;
 }
