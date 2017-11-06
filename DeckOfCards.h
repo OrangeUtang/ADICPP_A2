@@ -8,12 +8,14 @@ using namespace std;
 class DeckOfCards
 {
 public:
-	DeckOfCards(string[], int);
+	DeckOfCards();
+	DeckOfCards(vector<string*>,int);
 	Cards Draw();
+	int getNumCardsDeck();
 	bool IsEmpty();
-
+	
 private:
 	int numOfCards;
-
+	
 };
 

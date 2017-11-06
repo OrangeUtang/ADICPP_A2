@@ -1,15 +1,16 @@
 #include "Player.h"
 #include "Country.h"
 #include "Hand.h"
+#include "Reinforcement.h" 
 #include <iostream>
 #include <vector>
 #include <string>
 
-
+static Country* null = new Country("NULL", 0);
+Hand hand;
 
 Player::Player(void)
 {
-	hand = new Hand;
 	vector<Country*> countries;
 
 }
@@ -21,7 +22,7 @@ Player::~Player(void)
 
 void Player::pickCard(DeckOfCards &deck)
 {
-	hand->AddCardToHand(deck.Draw());
+	hand.AddCardToHand(deck.Draw());
 
 }
 
@@ -48,7 +49,7 @@ void Player::reinforce()
 }
 
 
-/*
+
 
 int* Player::attack(int numArmies)
 {
@@ -91,7 +92,7 @@ int* Player::defend(int numArmies)
 
 }
 
-*/
+
 
 int * Player::sort(int * ar)
 {
@@ -187,6 +188,12 @@ void Player::AddArmytoCountry(Country* c)
 	}
 }
 
+Hand* Player::getHand()
+{
+	return &hand;
+}
+
+
 int Player::GetTotalArmySize()
 {
 	int ArmySize = 0;
@@ -212,6 +219,16 @@ void Player::printCountries() {
 
 }
 
+bool Player::OwnsContinent()
+{
+	if (continents.size() > 0)
+		return true;
+	else
+		return false;
+}
+
+
+
 
 int Player::searchCountry(string name) {
 
@@ -231,10 +248,11 @@ int Player::searchCountry(string name) {
 
 void Player::printHand()
 {
-	hand->PrintHand();
+	hand.PrintHand();
 }
 
 int Player::getNumDices()
 {
 	return numOfChosenDices;
 }
+

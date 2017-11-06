@@ -140,3 +140,8 @@ void Country::setOwner(Player* aPlayer)
 {
 	owner = aPlayer;
 }
+
+int Country::getAdjacencySize()
+{
+	return adjacency.size();
+}

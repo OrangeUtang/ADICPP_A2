@@ -1,4 +1,3 @@
-
 #include "Continent.h"
 #include <string>
 #include <iostream>
@@ -46,7 +45,6 @@ Country* Continent::getCountryMembersAt(int x)
 {
 	return countryMembers.at(x);
 }
-
 void Continent::setCountryMembersAt(int x, Country* aCountry)
 {
 	countryMembers.at(x) = aCountry;

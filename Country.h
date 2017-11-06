@@ -57,6 +57,8 @@ public:
 	Player* getOwner();
 	void setOwner(Player*);
 
+	int getAdjacencySize();
+
 
 };
 

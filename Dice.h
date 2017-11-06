@@ -3,7 +3,7 @@ class Dice {
 
 private:
 
-	int value = 0;
+	int value = 0 ;
 
 
 public:

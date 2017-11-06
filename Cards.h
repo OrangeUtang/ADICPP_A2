@@ -9,12 +9,12 @@ class Cards
 public:
 	Cards(void);
 	~Cards(void);
-	Cards(string Country, string Type);
+	Cards(string Country,string Type);
 	void Print();
-	string country;
-	string type;
 	string getCountry();
 	string getType();
+	string country;
+	string type;
 private:
 
 };
